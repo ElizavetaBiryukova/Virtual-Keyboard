@@ -31,8 +31,6 @@ class Keyboard {
     this.language.classList.add('language');
     this.language.textContent = 'To switch ENG/РУС input methods, press Ctrl+Alt.';
 
-    this.container.append(this.keyboardRow);
-
     this.container.append(keyFragment);
 
     this.wrapper.append(this.title, this.textarea, this.container, this.description, this.language);
@@ -314,6 +312,7 @@ keys.forEach((row) => {
     const keyElement = document.createElement('button');
 
     keyElement.classList.add('key');
+    keyElement.classList.add(`${key.code}`);
 
     keyElement.textContent = key.lang.en;
 
