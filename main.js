@@ -1,9 +1,12 @@
 import { keys, keyFragment } from './keys.js';
 
+const keyboardKeysArr = [];
+
 class Keyboard {
   constructor() {
     this.textarea = null;
     this.container = null;
+    this.lang = localStorage.getItem('lang') === 'ru' ? 'ru' : 'en';
   }
 
   init() {
@@ -36,11 +39,20 @@ class Keyboard {
     this.wrapper.append(this.title, this.textarea, this.container, this.description, this.language);
 
     document.body.append(this.wrapper);
-    this.createKeydown();
+
+    this.changeLang(this.lang);
+    this.createActions();
   }
 
-  createKeydown() {
+  createActions() {
     document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.altKey && !e.repeat) {
+        e.preventDefault();
+        this.lang = this.lang === 'ru' ? 'en' : 'ru';
+        localStorage.setItem('lang', this.lang);
+        this.changeLang(this.lang);
+      }
+
       const key = document.getElementById(e.code);
       this.insertText(key.textContent);
       key.classList.add('active');
@@ -56,8 +68,14 @@ class Keyboard {
     const start = this.textarea.selectionStart;
     const end = this.textarea.selectionEnd;
     this.textarea.value = this.textarea.value.substring(0, start) + text
-    + this.textarea.value.substring(end);
+      + this.textarea.value.substring(end);
     this.textarea.selectionEnd = start + text.length;
+  }
+
+  changeLang(lang) {
+    Array.from(this.container.querySelectorAll('.key')).forEach((e) => {
+      e.textContent = keyboardKeysArr[e.id][lang];
+    });
   }
 }
 
@@ -66,6 +84,7 @@ keys.forEach((row) => {
   keyboardRow.classList.add('row');
 
   row.forEach((key) => {
+    keyboardKeysArr[key.code] = key.lang;
     const keyElement = document.createElement('button');
     keyElement.setAttribute('id', key.code);
     keyElement.classList.add('key');
