@@ -43,6 +43,12 @@ class Keyboard {
     document.addEventListener('keydown', (e) => {
       const key = document.getElementById(e.code);
       this.insertText(key.textContent);
+      key.classList.add('active');
+    });
+
+    document.addEventListener('keyup', (e) => {
+      const key = document.getElementById(e.code);
+      key.classList.remove('active');
     });
   }
 

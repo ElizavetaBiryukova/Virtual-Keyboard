@@ -20,7 +20,7 @@
     height: 200px;
     margin: 10px auto 10px;
     padding: 10px;
-    font-size: 18px;
+    font-size: 25px;
     color: #444444;
 }
 
@@ -116,6 +116,7 @@
     background-color:#d0cdcd;
 }
 
-.active {
-    background:#d0cdcd;
+.keyboard .active {
+    background:#f404dc;
+    border-radius: 50px;
 }
