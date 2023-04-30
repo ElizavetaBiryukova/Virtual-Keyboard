@@ -48,7 +48,9 @@ class Keyboard {
 
   insertText(text) {
     const start = this.textarea.selectionStart;
-    this.textarea.value = this.textarea.value.substring(0, start) + text;
+    const end = this.textarea.selectionEnd;
+    this.textarea.value = this.textarea.value.substring(0, start) + text
+    + this.textarea.value.substring(end);
     this.textarea.selectionEnd = start + text.length;
   }
 }
