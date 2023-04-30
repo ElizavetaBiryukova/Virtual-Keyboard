@@ -1,6 +1,4 @@
-import { keys } from './key';
-
-const keyFragment = document.createDocumentFragment();
+import { keys, keyFragment } from './keys.js';
 
 class Keyboard {
   constructor() {
@@ -38,6 +36,20 @@ class Keyboard {
     this.wrapper.append(this.title, this.textarea, this.container, this.description, this.language);
 
     document.body.append(this.wrapper);
+    this.createKeydown();
+  }
+
+  createKeydown() {
+    document.addEventListener('keydown', (e) => {
+      const key = document.getElementById(e.code);
+      this.insertText(key.textContent);
+    });
+  }
+
+  insertText(text) {
+    const start = this.textarea.selectionStart;
+    this.textarea.value = this.textarea.value.substring(0, start) + text;
+    this.textarea.selectionEnd = start + text.length;
   }
 }
 
@@ -47,7 +59,7 @@ keys.forEach((row) => {
 
   row.forEach((key) => {
     const keyElement = document.createElement('button');
-
+    keyElement.setAttribute('id', key.code);
     keyElement.classList.add('key');
     keyElement.classList.add(`${key.code}`);
 

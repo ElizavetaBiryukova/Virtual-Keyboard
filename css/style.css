@@ -111,3 +111,11 @@
 .keyboard .Space {
     width: 370px;
 }
+
+.keyboard .key:hover {
+    background-color:#d0cdcd;
+}
+
+.active {
+    background:#d0cdcd;
+}

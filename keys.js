@@ -263,4 +263,6 @@ const keys = [
   ],
 ];
 
-export default { keys };
+const keyFragment = document.createDocumentFragment();
+
+export { keys, keyFragment };
