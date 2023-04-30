@@ -46,6 +46,7 @@ class Keyboard {
 
   createActions() {
     document.addEventListener('keydown', (e) => {
+      const key = document.getElementById(e.code);
       if ((e.ctrlKey || e.metaKey) && e.altKey && !e.repeat) {
         e.preventDefault();
         this.lang = this.lang === 'ru' ? 'en' : 'ru';
@@ -53,9 +54,40 @@ class Keyboard {
         this.changeLang(this.lang);
       }
 
-      const key = document.getElementById(e.code);
-      this.insertText(key.textContent);
-      key.classList.add('active');
+      if (e.code === 'Tab') {
+        e.preventDefault();
+        this.insertText('\t');
+      } else if (e.code === 'Enter') {
+        e.preventDefault();
+        this.insertText('\n');
+      } else if (e.code === 'Backspace') {
+        e.preventDefault();
+        let result;
+        const start = this.textarea.selectionStart;
+        const end = this.textarea.selectionEnd;
+        if (start === end) {
+          result = this.textarea.value.substring(0, start - 1) + this.textarea.value.substring(end);
+        } else {
+          result = this.textarea.value.substring(0, start) + this.textarea.value.substring(end);
+        }
+        this.textarea.value = result;
+        this.textarea.selectionEnd = (start === end) ? start - 1 : start;
+      } else if (e.code === 'Delete') {
+        e.preventDefault();
+        let result;
+        const start = this.textarea.selectionStart;
+        const end = this.textarea.selectionEnd;
+        if (start === end) {
+          result = this.textarea.value.substring(0, start) + this.textarea.value.substring(end + 1);
+        } else {
+          result = this.textarea.value.substring(0, start) + this.textarea.value.substring(end);
+        }
+        this.textarea.value = result;
+        this.textarea.selectionEnd = start;
+      } else {
+        this.insertText(key.textContent);
+        key.classList.add('active');
+      }
     });
 
     document.addEventListener('keyup', (e) => {
