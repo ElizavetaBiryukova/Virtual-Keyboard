@@ -148,6 +148,24 @@ class Keyboard {
 
       key.classList.remove('active');
     });
+
+    this.container.addEventListener('click', (e) => {
+      this.textarea.focus();
+      const keyDown = new KeyboardEvent('keydown', {
+        bubbles: true,
+        cancelable: true,
+        code: e.target.id,
+      });
+      document.dispatchEvent(keyDown);
+
+      this.textarea.focus();
+      const keyUp = new KeyboardEvent('keyup', {
+        bubbles: true,
+        cancelable: true,
+        code: e.target.id,
+      });
+      document.dispatchEvent(keyUp);
+    });
   }
 
   insertText(text) {
