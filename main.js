@@ -217,12 +217,12 @@ class Keyboard {
       this.textarea.textLength,
       this.textarea.selectionEnd + 1,
     );
-    this.textarea.selectionEnd = this.textarea.selectionStart;
+    this.textarea.selectionEnd = this.textarea.selectionStart - 1;
   }
 
   createArrowLeft() {
     this.textarea.selectionStart = Math.max(0, this.textarea.selectionStart - 1);
-    this.textarea.selectionEnd = this.textarea.selectionStart;
+    this.textarea.selectionEnd = this.textarea.selectionStart + 1;
   }
 
   createUpperCase() {
