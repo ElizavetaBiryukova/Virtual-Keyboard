@@ -99,6 +99,7 @@ class Keyboard {
         } else {
           this.capsLock = false;
         }
+        key.classList.add('active');
       } else if (!key) {
         e.preventDefault();
       } else {
@@ -128,12 +129,17 @@ class Keyboard {
     this.textarea.value = this.textarea.value.substring(0, start) + text
       + this.textarea.value.substring(end);
     this.textarea.selectionEnd = start + text.length;
+    this.removeFocus();
   }
 
   changeLang(lang) {
     Array.from(this.container.querySelectorAll('.key')).forEach((e) => {
       e.textContent = keyboardKeysArr[e.id][lang];
     });
+  }
+
+  removeFocus() {
+    this.textarea.blur();
   }
 }
 
