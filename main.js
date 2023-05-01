@@ -7,6 +7,7 @@ class Keyboard {
     this.textarea = null;
     this.container = null;
     this.lang = localStorage.getItem('lang') === 'ru' ? 'ru' : 'en';
+    this.capsLock = false;
   }
 
   init() {
@@ -35,7 +36,6 @@ class Keyboard {
     this.language.textContent = 'To switch ENG/РУС input methods, press Ctrl+Alt.';
 
     this.container.append(keyFragment);
-
     this.wrapper.append(this.title, this.textarea, this.container, this.description, this.language);
 
     document.body.append(this.wrapper);
@@ -47,11 +47,6 @@ class Keyboard {
   createActions() {
     document.addEventListener('keydown', (e) => {
       const key = document.getElementById(e.code);
-
-      // if (!key) {
-      //   e.preventDefault();
-      //   return;
-      // }
 
       if ((e.ctrlKey || e.metaKey) && e.altKey && !e.repeat) {
         e.preventDefault();
@@ -97,10 +92,21 @@ class Keyboard {
         e.preventDefault();
         key.classList.add('active');
         this.container.focus();
+      } else if (e.code === 'CapsLock') {
+        e.preventDefault();
+        if (!this.capsLock) {
+          this.capsLock = true;
+        } else {
+          this.capsLock = false;
+        }
       } else if (!key) {
         e.preventDefault();
       } else {
-        this.insertText(key.textContent);
+        if (this.capsLock) {
+          this.insertText(key.textContent.toUpperCase());
+        } else {
+          this.insertText(key.textContent);
+        }
         key.classList.add('active');
       }
     });
