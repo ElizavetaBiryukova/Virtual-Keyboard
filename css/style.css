@@ -116,6 +116,11 @@
     background-color:#d0cdcd;
 }
 
+.keyboard .key:active {
+    background:#f404dc;
+    border-radius: 50px;
+}
+
 .keyboard .active {
     background:#f404dc;
     border-radius: 50px;

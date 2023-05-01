@@ -36,42 +36,54 @@ class Keyboard {
     this.createKey();
     this.changeLang(this.lang);
     this.createActions();
+    this.textarea.focus();
   }
 
   createActions() {
     document.addEventListener('keydown', (e) => {
       const key = document.getElementById(e.code);
-
-      key.classList.add('active');
+      this.textarea.focus();
 
       this.switchLanguage(e);
 
       if (e.code === 'Tab') {
         this.createTab(e);
+        key.classList.add('active');
       } else if (e.code === 'Enter') {
         this.createEnter(e);
+        key.classList.add('active');
       } else if (e.code === 'Backspace') {
         this.createBackspace(e);
+        key.classList.add('active');
       } else if (e.code === 'Delete') {
         this.createDelete(e);
+        key.classList.add('active');
       } else if (e.code === 'ControlLeft' || e.code === 'ControlRight') {
         e.preventDefault();
+        key.classList.add('active');
       } else if (e.code === 'AltLeft' || e.code === 'AltRight') {
         e.preventDefault();
         this.container.focus();
+        key.classList.add('active');
       } else if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
         e.preventDefault();
         this.createUpperCase();
+        key.classList.add('active');
       } else if (e.code === 'ArrowUp') {
         this.createArrowUp();
+        key.classList.add('active');
       } else if (e.code === 'ArrowDown') {
         this.createArrowDown();
+        key.classList.add('active');
       } else if (e.code === 'ArrowRight') {
         this.createArrowRight();
+        key.classList.add('active');
       } else if (e.code === 'ArrowLeft') {
         this.createArrowLeft();
+        key.classList.add('active');
       } else if (e.code === 'CapsLock') {
         this.createUpperCase();
+        key.classList.add('active');
       } else if (!key) {
         e.preventDefault();
       } else {
@@ -80,6 +92,7 @@ class Keyboard {
         } else {
           this.insertText(key.textContent);
         }
+
         key.classList.add('active');
       }
     });
