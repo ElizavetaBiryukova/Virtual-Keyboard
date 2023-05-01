@@ -3,7 +3,7 @@ import { keys, keyboardKeysArr } from './keys.js';
 class Keyboard {
   constructor() {
     this.lang = localStorage.getItem('lang') === 'ru' ? 'ru' : 'en';
-    this.capsLock = false;
+    this.upperCase = false;
   }
 
   init() {
@@ -61,7 +61,7 @@ class Keyboard {
         this.container.focus();
       } else if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
         e.preventDefault();
-        this.container.focus();
+        this.createUpperCase();
       } else if (e.code === 'ArrowUp') {
         this.createArrowUp();
       } else if (e.code === 'ArrowDown') {
@@ -71,11 +71,11 @@ class Keyboard {
       } else if (e.code === 'ArrowLeft') {
         this.createArrowLeft();
       } else if (e.code === 'CapsLock') {
-        this.createCapsLock();
+        this.createUpperCase();
       } else if (!key) {
         e.preventDefault();
       } else {
-        if (this.capsLock) {
+        if (this.upperCase) {
           this.insertText(key.textContent.toUpperCase());
         } else {
           this.insertText(key.textContent);
@@ -90,7 +90,9 @@ class Keyboard {
         e.preventDefault();
         return;
       }
-
+      if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+        this.upperCase = false;
+      }
       key.classList.remove('active');
     });
 
@@ -223,11 +225,11 @@ class Keyboard {
     this.textarea.selectionEnd = this.textarea.selectionStart;
   }
 
-  createCapsLock() {
-    if (!this.capsLock) {
-      this.capsLock = true;
+  createUpperCase() {
+    if (!this.upperCase) {
+      this.upperCase = true;
     } else {
-      this.capsLock = false;
+      this.upperCase = false;
     }
   }
 }
