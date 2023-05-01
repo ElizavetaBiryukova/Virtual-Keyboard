@@ -263,6 +263,6 @@ const keys = [
   ],
 ];
 
-const keyFragment = document.createDocumentFragment();
+const keyboardKeysArr = [];
 
-export { keys, keyFragment };
+export { keys, keyboardKeysArr };
