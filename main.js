@@ -47,6 +47,12 @@ class Keyboard {
   createActions() {
     document.addEventListener('keydown', (e) => {
       const key = document.getElementById(e.code);
+
+      // if (!key) {
+      //   e.preventDefault();
+      //   return;
+      // }
+
       if ((e.ctrlKey || e.metaKey) && e.altKey && !e.repeat) {
         e.preventDefault();
         this.lang = this.lang === 'ru' ? 'en' : 'ru';
@@ -84,6 +90,15 @@ class Keyboard {
         }
         this.textarea.value = result;
         this.textarea.selectionEnd = start;
+      } else if (e.code === 'ControlLeft' || e.code === 'ControlRight') {
+        e.preventDefault();
+        key.classList.add('active');
+      } else if (e.code === 'AltLeft' || e.code === 'AltRight') {
+        e.preventDefault();
+        key.classList.add('active');
+        this.container.focus();
+      } else if (!key) {
+        e.preventDefault();
       } else {
         this.insertText(key.textContent);
         key.classList.add('active');
@@ -92,6 +107,11 @@ class Keyboard {
 
     document.addEventListener('keyup', (e) => {
       const key = document.getElementById(e.code);
+      if (!key) {
+        e.preventDefault();
+        return;
+      }
+
       key.classList.remove('active');
     });
   }
