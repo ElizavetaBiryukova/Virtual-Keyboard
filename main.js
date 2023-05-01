@@ -58,9 +58,11 @@ class Keyboard {
       if (e.code === 'Tab') {
         e.preventDefault();
         this.insertText('\t');
+        key.classList.add('active');
       } else if (e.code === 'Enter') {
         e.preventDefault();
         this.insertText('\n');
+        key.classList.add('active');
       } else if (e.code === 'Backspace') {
         e.preventDefault();
         let result;
@@ -73,6 +75,7 @@ class Keyboard {
         }
         this.textarea.value = result;
         this.textarea.selectionEnd = (start === end) ? start - 1 : start;
+        key.classList.add('active');
       } else if (e.code === 'Delete') {
         e.preventDefault();
         let result;
@@ -85,6 +88,7 @@ class Keyboard {
         }
         this.textarea.value = result;
         this.textarea.selectionEnd = start;
+        key.classList.add('active');
       } else if (e.code === 'ControlLeft' || e.code === 'ControlRight') {
         e.preventDefault();
         key.classList.add('active');
@@ -92,6 +96,29 @@ class Keyboard {
         e.preventDefault();
         key.classList.add('active');
         this.container.focus();
+      } else if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+        e.preventDefault();
+        key.classList.add('active');
+        this.container.focus();
+      } else if (e.code === 'ArrowUp') {
+        this.textarea.selectionStart = 0;
+        this.textarea.selectionEnd = this.textarea.selectionStart;
+        key.classList.add('active');
+      } else if (e.code === 'ArrowDown') {
+        this.textarea.selectionEnd = this.textarea.textLength;
+        this.textarea.selectionStart = this.textarea.selectionEnd;
+        key.classList.add('active');
+      } else if (e.code === 'ArrowRight') {
+        this.textarea.selectionStart = Math.min(
+          this.textarea.textLength,
+          this.textarea.selectionEnd + 1,
+        );
+        this.textarea.selectionEnd = this.textarea.selectionStart;
+        key.classList.add('active');
+      } else if (e.code === 'ArrowLeft') {
+        this.textarea.selectionStart = Math.max(0, this.textarea.selectionStart - 1);
+        this.textarea.selectionEnd = this.textarea.selectionStart;
+        key.classList.add('active');
       } else if (e.code === 'CapsLock') {
         e.preventDefault();
         if (!this.capsLock) {
