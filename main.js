@@ -42,6 +42,7 @@ class Keyboard {
   createActions() {
     document.addEventListener('keydown', (e) => {
       const key = document.getElementById(e.code);
+
       this.textarea.focus();
 
       this.switchLanguage(e);
@@ -67,6 +68,7 @@ class Keyboard {
         key.classList.add('active');
       } else if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
         e.preventDefault();
+        this.createShift(e.shiftKey);
         this.createUpperCase();
         key.classList.add('active');
       } else if (e.code === 'ArrowUp') {
@@ -83,7 +85,8 @@ class Keyboard {
         key.classList.add('active');
       } else if (e.code === 'CapsLock') {
         this.createUpperCase();
-        key.classList.add('active');
+        this.wrapper.classList.toggle('capsLock');
+        key.classList.toggle('active');
       } else if (!key) {
         e.preventDefault();
       } else {
@@ -92,30 +95,51 @@ class Keyboard {
         } else {
           this.insertText(key.textContent);
         }
-
         key.classList.add('active');
       }
     });
 
     document.addEventListener('keyup', (e) => {
       const key = document.getElementById(e.code);
+      const capsLock = document.getElementById('CapsLock');
       if (!key) {
         e.preventDefault();
         return;
       }
       if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
         this.upperCase = false;
+        this.createShift(e.shiftKey);
       }
+
       key.classList.remove('active');
+
+      if (e.code === 'CapsLock' && this.upperCase) {
+        key.classList.add('active');
+        this.wrapper.classList.add('capsLock');
+      }
+
+      if (e.code === 'ShiftLeft' && capsLock.classList.contains('active')) {
+        this.upperCase = true;
+      }
+
+      if (e.code === 'ShiftRight' && capsLock.classList.contains('active')) {
+        this.upperCase = true;
+      }
     });
 
     this.container.addEventListener('click', (e) => {
+      const capsLock = document.getElementById('CapsLock');
+      if (e.shiftKey) {
+        this.upperCase = true;
+      }
+      if (e.shiftKey && capsLock.classList.contains('active')) {
+        this.upperCase = false;
+      }
       this.textarea.focus();
       const keyDown = new KeyboardEvent('keydown', {
         bubbles: true,
         cancelable: true,
         code: e.target.id,
-        repeat: true,
       });
       document.dispatchEvent(keyDown);
 
@@ -124,7 +148,6 @@ class Keyboard {
         bubbles: true,
         cancelable: true,
         code: e.target.id,
-        repeat: true,
       });
       document.dispatchEvent(keyUp);
     });
@@ -246,6 +269,56 @@ class Keyboard {
     } else {
       this.upperCase = false;
     }
+  }
+
+  createShift(shiftKey) {
+    Array.from(this.container.querySelectorAll('.key')).forEach((e) => {
+      if (e.id === 'Backquote' && this.lang === 'en') {
+        e.textContent = shiftKey ? '~' : '`';
+      } else if (e.id === 'Minus') {
+        e.textContent = shiftKey ? '_' : '-';
+      } else if (e.id === 'Equal') {
+        e.textContent = shiftKey ? '+' : '=';
+      } else if (e.id === 'BracketLeft' && this.lang === 'en') {
+        e.textContent = shiftKey ? '{' : '[';
+      } else if (e.id === 'BracketRight' && this.lang === 'en') {
+        e.textContent = shiftKey ? '}' : ']';
+      } else if (e.id === 'Backslash') {
+        e.textContent = shiftKey ? '|' : '\\';
+      } else if (e.id === 'Semicolon' && this.lang === 'en') {
+        e.textContent = shiftKey ? ':' : ';';
+      } else if (e.id === 'Quote' && this.lang === 'en') {
+        e.textContent = shiftKey ? '"' : "'";
+      } else if (e.id === 'Comma' && this.lang === 'en') {
+        e.textContent = shiftKey ? '<' : ',';
+      } else if (e.id === 'Period' && this.lang === 'en') {
+        e.textContent = shiftKey ? '>' : '.';
+      } else if (e.id === 'Slash' && this.lang === 'en') {
+        e.textContent = shiftKey ? '?' : '/';
+      } else if (e.id === 'Slash' && this.lang === 'ru') {
+        e.textContent = shiftKey ? ',' : '.';
+      } else if (e.id === 'Digit1') {
+        e.textContent = shiftKey ? '!' : '1';
+      } else if (e.id === 'Digit2') {
+        e.textContent = shiftKey ? '@' : '2';
+      } else if (e.id === 'Digit3') {
+        e.textContent = shiftKey ? '#' : '3';
+      } else if (e.id === 'Digit4') {
+        e.textContent = shiftKey ? '$' : '4';
+      } else if (e.id === 'Digit5') {
+        e.textContent = shiftKey ? '%' : '5';
+      } else if (e.id === 'Digit6') {
+        e.textContent = shiftKey ? '^' : '6';
+      } else if (e.id === 'Digit7') {
+        e.textContent = shiftKey ? '&' : '7';
+      } else if (e.id === 'Digit8') {
+        e.textContent = shiftKey ? '*' : '8';
+      } else if (e.id === 'Digit9') {
+        e.textContent = shiftKey ? '(' : '9';
+      } else if (e.id === 'Digit0') {
+        e.textContent = shiftKey ? ')' : '0';
+      }
+    });
   }
 }
 

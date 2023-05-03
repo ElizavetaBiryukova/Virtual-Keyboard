@@ -125,3 +125,26 @@
     background:#f404dc;
     border-radius: 50px;
 }
+
+.capsLock .key {
+    text-transform: uppercase;
+}
+
+.capsLock .AltLeft,
+.capsLock .AltRight,
+.capsLock .ArrowUp,
+.capsLock .ArrowLeft,
+.capsLock .ArrowDown,
+.capsLock .ArrowRight,
+.capsLock .Backspace,
+.capsLock .CapsLock,
+.capsLock .ControlLeft,
+.capsLock .ControlRight,
+.capsLock .Delete,
+.capsLock .Enter,
+.capsLock .ShiftLeft,
+.capsLock .ShiftRight,
+.capsLock .Tab,
+.capsLock .MetaLeft {
+    text-transform: none;
+}
