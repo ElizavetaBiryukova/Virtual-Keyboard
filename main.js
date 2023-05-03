@@ -115,6 +115,7 @@ class Keyboard {
         bubbles: true,
         cancelable: true,
         code: e.target.id,
+        repeat: true,
       });
       document.dispatchEvent(keyDown);
 
@@ -123,6 +124,7 @@ class Keyboard {
         bubbles: true,
         cancelable: true,
         code: e.target.id,
+        repeat: true,
       });
       document.dispatchEvent(keyUp);
     });
