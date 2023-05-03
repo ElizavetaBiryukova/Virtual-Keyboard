@@ -1,0 +1,150 @@
+.wrapper {
+    margin: 0 auto;
+}
+
+.description,
+.language,
+.title {
+    margin: 10px auto;
+    text-align: center;
+}
+
+.title {
+    font-size: 30px;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.textarea {
+    display: block;
+    width: 700px;
+    height: 200px;
+    margin: 10px auto 10px;
+    padding: 10px;
+    font-size: 25px;
+    color: #444444;
+}
+
+.keyboard {
+    width: 704px;
+    margin: 0 auto;
+    padding: 5px;
+    padding-left: 0;
+    padding-bottom: 0;
+    background: #dad7d7;
+    border: 3px solid #222222;
+    border-radius: 5px;
+}
+
+.keyboard .row {
+    clear: both;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 8px;
+}
+
+.keyboard .key {
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-left: 6px;
+    line-height: 34px;
+    text-align: center;
+    color: #000000;
+    font-weight: 900;
+    font-size: 110%;
+    background: #fffdfd;
+    border-radius: 3px;
+    cursor: pointer;
+    user-select: none;
+    transition: border-radius 0.3s, background-color 0.3s;
+}
+
+.keyboard .Backspace,
+.keyboard .CapsLock,
+.keyboard .ShiftLeft {
+    width: 100px;
+}
+
+.keyboard .AltLeft,
+.keyboard .AltRight,
+.keyboard .ArrowUp,
+.keyboard .ArrowLeft,
+.keyboard .ArrowDown,
+.keyboard .ArrowRight,
+.keyboard .Backspace,
+.keyboard .CapsLock,
+.keyboard .ControlLeft,
+.keyboard .ControlRight,
+.keyboard .Delete,
+.keyboard .Enter,
+.keyboard .ShiftLeft,
+.keyboard .ShiftRight,
+.keyboard .Tab,
+.keyboard .MetaLeft {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.keyboard .Enter,
+.keyboard .ShiftRight {
+    width: 86px;
+}
+
+.keyboard .Tab {
+    width: 50px;
+}
+
+.keyboard .Delete {
+    width: 44px;
+}
+
+.keyboard .ControlLeft {
+    width: 46px;
+    font-size: 100%;
+}
+
+.keyboard .ControlRight {
+    width: 40px;
+    font-size: 100%;
+}
+
+.keyboard .Space {
+    width: 370px;
+}
+
+.keyboard .key:hover {
+    background-color:#d0cdcd;
+}
+
+.keyboard .key:active {
+    background:#f404dc;
+    border-radius: 50px;
+}
+
+.keyboard .active {
+    background:#f404dc;
+    border-radius: 50px;
+}
+
+.capsLock .key {
+    text-transform: uppercase;
+}
+
+.capsLock .AltLeft,
+.capsLock .AltRight,
+.capsLock .ArrowUp,
+.capsLock .ArrowLeft,
+.capsLock .ArrowDown,
+.capsLock .ArrowRight,
+.capsLock .Backspace,
+.capsLock .CapsLock,
+.capsLock .ControlLeft,
+.capsLock .ControlRight,
+.capsLock .Delete,
+.capsLock .Enter,
+.capsLock .ShiftLeft,
+.capsLock .ShiftRight,
+.capsLock .Tab,
+.capsLock .MetaLeft {
+    text-transform: none;
+}
